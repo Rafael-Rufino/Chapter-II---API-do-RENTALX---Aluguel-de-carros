@@ -1,12 +1,12 @@
 import express from "express";
-import { categoriesRoutes } from "./routes/categories.routes";
-
+import { router } from "./routes";
+import swaggerUi from "swagger-ui-express";
+import swaggerFile from "./swagger.json";
 const app = express();
 
 app.use(express.json());
-
-app.use("/categories", categoriesRoutes);
-
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
+app.use(router);
 const port = 3333;
 
 app.listen(port, () => {
